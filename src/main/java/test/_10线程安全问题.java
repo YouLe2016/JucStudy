@@ -11,7 +11,31 @@ public class _10线程安全问题 {
     private static final Object lock = new Object();
     public static void main(String[] args) throws InterruptedException{
         // test1();
-        test2();
+        // test2();
+        test3();
+    }
+
+    private static void test3() throws InterruptedException {
+        Room room = new Room();
+        Thread t1 = new Thread(() -> {
+            for (int i = 0; i < 10000; i++) {
+                for (int j = 0; j < 10000; j++) {
+                    room.increment();
+                }
+            }
+        });
+        t1.start();
+        Thread t2 = new Thread(() -> {
+            for (int i = 0; i < 10000; i++) {
+                for (int j = 0; j < 10000; j++) {
+                    room.decrement();
+                }
+            }
+        });
+        t2.start();
+        t1.join();
+        t2.join();
+        logger.info("count={}", room.getCount());
     }
 
     /*
@@ -61,5 +85,27 @@ public class _10线程安全问题 {
         t1.join();
         t2.join();
         logger.debug("count={}", count);
+    }
+}
+
+class Room {
+    private int count = 0;
+
+    public void increment() {
+        synchronized (this) {
+            count++;
+        }
+    }
+
+    public void decrement() {
+        synchronized (this) {
+            count--;
+        }
+    }
+
+    public int getCount() {
+        synchronized (this) {
+            return count;
+        }
     }
 }
