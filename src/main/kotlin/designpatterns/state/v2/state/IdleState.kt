@@ -10,8 +10,8 @@ object IdleState : VendingState {
         context.changeState(HasMoneyState)
     }
 
-    override fun selectProduct(code: String) {
-        TODO("Not yet implemented")
+    override fun selectProduct(code: String, context: VendingMachineContext) {
+        println("请先投币")
     }
 
     override fun requestRefund() {

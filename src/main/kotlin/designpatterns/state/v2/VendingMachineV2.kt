@@ -13,7 +13,7 @@ class VendingMachineV2 : VendingMachineContext() {
     }
 
     fun selectProduct(code: String) {
-        state.selectProduct(code)
+        state.selectProduct(code, this)
     }
 
     fun requestRefund() {

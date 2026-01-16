@@ -14,7 +14,7 @@ object DefaultState : VendingState {
         insertUseCase()
     }
 
-    override fun selectProduct(code: String) {
+    override fun selectProduct(code: String, context: VendingMachineContext) {
         selectProductUseCase(code)
     }
 

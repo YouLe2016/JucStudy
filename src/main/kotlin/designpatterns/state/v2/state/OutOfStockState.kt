@@ -7,11 +7,11 @@ object OutOfStockState: VendingState {
         println("商品已售罄")
     }
 
-    override fun selectProduct(code: String) {
-        TODO("Not yet implemented")
+    override fun selectProduct(code: String, context: VendingMachineContext) {
+        println("商品已售罄")
     }
 
     override fun requestRefund() {
-        TODO("Not yet implemented")
+        println("商品已售罄")
     }
 }
