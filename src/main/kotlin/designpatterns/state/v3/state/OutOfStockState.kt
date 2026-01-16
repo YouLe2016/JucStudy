@@ -10,8 +10,8 @@ object OutOfStockState : VendingState {
     ) {
         when (intent) {
             VendingIntent.InsertMoney -> println("商品已售罄")
-            VendingIntent.RequestRefund -> TODO()
-            is VendingIntent.SelectProduct -> TODO()
+            VendingIntent.RequestRefund -> println("商品已售罄")
+            is VendingIntent.SelectProduct -> println("商品已售罄")
         }
     }
 }
