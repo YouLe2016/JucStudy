@@ -10,7 +10,19 @@ class VendingMachineV4 {
         println("VendingMachineV4 init. state = $state")
     }
 
-    fun process(intent: VendingIntent) {
+    private fun process(intent: VendingIntent) {
         state = state.handle(intent)
+    }
+    
+    fun insertMoney() {
+        process(VendingIntent.InsertMoney)
+    }
+
+    fun selectProduct(code: String) {
+        process(VendingIntent.SelectProduct(code))
+    }
+
+    fun requestRefund() {
+        process(VendingIntent.RequestRefund)
     }
 }

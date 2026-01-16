@@ -23,7 +23,7 @@ class VendingMachineV4Test {
 
     @Test
     fun testInsertMoney_idle() {
-        vendingMachine.process(VendingIntent.InsertMoney)
+        vendingMachine.insertMoney()
         assertEquals(
             expected = HasMoneyState,
             actual = getPrivateProperty(vendingMachine, "state"),
@@ -34,8 +34,8 @@ class VendingMachineV4Test {
     @Test
     fun testInsertMoney_hasMoney() {
         // 进入HAS_MONEY 状态
-        vendingMachine.process(VendingIntent.InsertMoney)
-        vendingMachine.process(VendingIntent.InsertMoney)
+        vendingMachine.insertMoney()
+        vendingMachine.insertMoney()
         assertEquals(
             expected = HasMoneyState,
             actual = getPrivateProperty(vendingMachine, "state"),
@@ -47,13 +47,14 @@ class VendingMachineV4Test {
     fun testInsertMoney_OutOfStock() {
         // 强行设置状态为 OUT_OF_STOCK (因为没有正常逻辑能到达这个状态)
         setPrivateProperty(vendingMachine, "state", OutOfStockState)
-        vendingMachine.process(VendingIntent.InsertMoney)
+        vendingMachine.insertMoney()
         assertEquals(
             expected = OutOfStockState,
             actual = getPrivateProperty(vendingMachine, "state"),
             message = "状态应保持不变"
         )
     }
+
 //    @Test
 //    fun testSelectProduct() {
 //        vendingMachine.process(VendingIntent.SelectProduct)
