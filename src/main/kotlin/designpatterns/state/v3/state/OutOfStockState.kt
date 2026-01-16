@@ -8,10 +8,6 @@ object OutOfStockState : VendingState {
         intent: VendingIntent,
         context: VendingMachineContext
     ) {
-        when (intent) {
-            VendingIntent.InsertMoney -> println("商品已售罄")
-            VendingIntent.RequestRefund -> println("商品已售罄")
-            is VendingIntent.SelectProduct -> println("商品已售罄")
-        }
+        println("商品已售罄")
     }
 }

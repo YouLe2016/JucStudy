@@ -1,5 +1,6 @@
 package designpatterns.state.v4.state
 
+import designpatterns.state.usecase.SelectProduceUseCase
 import designpatterns.state.v4.VendingIntent
 
 object HasMoneyState : VendingState() {
@@ -10,7 +11,11 @@ object HasMoneyState : VendingState() {
                 return this
             }
             VendingIntent.RequestRefund -> TODO()
-            is VendingIntent.SelectProduct -> TODO()
+
+            is VendingIntent.SelectProduct -> {
+                val result = SelectProduceUseCase(intent.code)
+                return if (result) IdleState else this
+            }
         }
     }
 }
