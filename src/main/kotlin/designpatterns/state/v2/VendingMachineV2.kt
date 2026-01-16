@@ -1,7 +1,5 @@
 package designpatterns.state.v2
 
-import jdk.jfr.DataAmount
-
 /**
  * 状态模式
  */
