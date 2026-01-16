@@ -5,7 +5,7 @@ import designpatterns.state.v2.VendingMachineContext
 sealed interface VendingState {
     fun insertMoney(context: VendingMachineContext)
 
-    fun selectProduct()
+    fun selectProduct(code: String)
 
     fun requestRefund()
 }

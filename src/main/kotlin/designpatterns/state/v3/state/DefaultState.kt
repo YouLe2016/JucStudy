@@ -1,10 +1,9 @@
 package designpatterns.state.v3.state
 
-import designpatterns.state.v3.VendingIntent
-
 import designpatterns.state.usecase.InsertMoneyUseCase
 import designpatterns.state.usecase.RequestRefundUseCase
 import designpatterns.state.usecase.SelectProduceUseCase
+import designpatterns.state.v3.VendingIntent
 import designpatterns.state.v3.VendingMachineContext
 
 object DefaultState : VendingState {
@@ -14,16 +13,16 @@ object DefaultState : VendingState {
 
     override fun handle(intent: VendingIntent, context: VendingMachineContext) {
         when (intent) {
-            is VendingIntent.InsertMoney -> {
+            VendingIntent.InsertMoney -> {
                 insertUseCase()
             }
 
-            is VendingIntent.SelectProduct -> {
-                selectProductUseCase()
+            VendingIntent.RequestRefund -> {
+                requestRefundUseCase()
             }
 
-            is VendingIntent.RequestRefund -> {
-                requestRefundUseCase()
+            is VendingIntent.SelectProduct -> {
+                selectProductUseCase(intent.code)
             }
         }
     }

@@ -12,8 +12,8 @@ class VendingMachineV2 : VendingMachineContext() {
         state.insertMoney(this)
     }
 
-    fun selectProduct() {
-        state.selectProduct()
+    fun selectProduct(code: String) {
+        state.selectProduct(code)
     }
 
     fun requestRefund() {

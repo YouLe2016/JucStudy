@@ -54,7 +54,8 @@ class VendingMachineTest {
 
     @Test
     fun testSelectProduct() {
-        vendingMachine.selectProduct()
+        vendingMachine.selectProduct("1024")
+        vendingMachine.selectProduct("1025")
     }
 
     @Test

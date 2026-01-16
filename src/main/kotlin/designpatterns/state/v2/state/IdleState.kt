@@ -10,7 +10,7 @@ object IdleState : VendingState {
         context.changeState(HasMoneyState)
     }
 
-    override fun selectProduct() {
+    override fun selectProduct(code: String) {
         TODO("Not yet implemented")
     }
 

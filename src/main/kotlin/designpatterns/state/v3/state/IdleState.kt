@@ -14,7 +14,7 @@ object IdleState: VendingState {
                 context.changeState(HasMoneyState)
             }
             VendingIntent.RequestRefund -> TODO()
-            VendingIntent.SelectProduct -> TODO()
+            is VendingIntent.SelectProduct -> TODO()
         }
     }
 }

@@ -10,7 +10,7 @@ object HasMoneyState : VendingState() {
                 return this
             }
             VendingIntent.RequestRefund -> TODO()
-            VendingIntent.SelectProduct -> TODO()
+            is VendingIntent.SelectProduct -> TODO()
         }
     }
 }

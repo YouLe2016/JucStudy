@@ -7,7 +7,7 @@ object OutOfStockState: VendingState {
         println("商品已售罄")
     }
 
-    override fun selectProduct() {
+    override fun selectProduct(code: String) {
         TODO("Not yet implemented")
     }
 

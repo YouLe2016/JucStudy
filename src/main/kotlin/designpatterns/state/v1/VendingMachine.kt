@@ -28,8 +28,8 @@ class VendingMachine() {
         }
     }
 
-    fun selectProduct() {
-        selectProductUseCase()
+    fun selectProduct(code: String) {
+        selectProductUseCase(code)
     }
 
     fun requestRefund() {

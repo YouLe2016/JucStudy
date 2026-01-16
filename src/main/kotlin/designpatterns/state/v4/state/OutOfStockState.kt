@@ -9,7 +9,7 @@ object OutOfStockState : VendingState() {
                 println("商品已售罄")
             }
             VendingIntent.RequestRefund -> TODO()
-            VendingIntent.SelectProduct -> TODO()
+            is VendingIntent.SelectProduct -> TODO()
         }
         return this
     }

@@ -11,7 +11,7 @@ object HasMoneyState: VendingState {
         when (intent) {
             VendingIntent.InsertMoney -> println("已投币，请勿重复投币")
             VendingIntent.RequestRefund -> TODO()
-            VendingIntent.SelectProduct -> TODO()
+            is VendingIntent.SelectProduct -> TODO()
         }
     }
 }

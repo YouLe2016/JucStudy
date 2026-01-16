@@ -7,7 +7,7 @@ object HasMoneyState : VendingState {
         println("已投币，请勿重复投币")
     }
 
-    override fun selectProduct() {
+    override fun selectProduct(code: String) {
         TODO("Not yet implemented")
     }
 

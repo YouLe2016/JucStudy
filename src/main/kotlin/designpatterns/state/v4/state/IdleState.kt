@@ -13,7 +13,7 @@ object IdleState: VendingState() {
                 return HasMoneyState
             }
             VendingIntent.RequestRefund -> TODO()
-            VendingIntent.SelectProduct -> TODO()
+            is VendingIntent.SelectProduct -> TODO()
         }
     }
 }

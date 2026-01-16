@@ -12,15 +12,15 @@ object DefaultState : VendingState() {
 
     override fun handle(intent: VendingIntent): VendingState {
         when (intent) {
-            is VendingIntent.InsertMoney -> {
+            VendingIntent.InsertMoney -> {
                 insertUseCase()
             }
 
             is VendingIntent.SelectProduct -> {
-                selectProductUseCase()
+                selectProductUseCase(intent.code)
             }
 
-            is VendingIntent.RequestRefund -> {
+            VendingIntent.RequestRefund -> {
                 requestRefundUseCase()
             }
         }
