@@ -1,5 +1,8 @@
 package designpatterns.state.v1
 
+/**
+ * 纯逻辑
+ */
 class VendingMachine() {
     init {
         println("VendingMachine init")
