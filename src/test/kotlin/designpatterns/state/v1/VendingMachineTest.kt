@@ -3,13 +3,13 @@ package designpatterns.state.v1
 import designpatterns.utils.getPrivateProperty
 import designpatterns.utils.setPrivateProperty
 import org.junit.jupiter.api.BeforeEach
-import java.lang.reflect.Field
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 
 class VendingMachineTest {
-    private val vendingMachine = VendingMachine()
+    private val initBalance = 10
+    private val vendingMachine = VendingMachine(initBalance)
 
     @BeforeEach
     fun setUp() {
@@ -18,39 +18,95 @@ class VendingMachineTest {
             actual = getPrivateProperty(vendingMachine, "state"),
             message = "状态应为 IDLE"
         )
+        assertEquals(
+            expected = initBalance,
+            actual = getPrivateProperty(vendingMachine, "balance"),
+            message = "balance 应为 $initBalance"
+        )
+        assertEquals(
+            expected = 0,
+            actual = getPrivateProperty(vendingMachine, "mAmount"),
+            message = "balance 应为：0"
+        )
     }
 
     @Test
     fun testInsertMoney_idle() {
-        vendingMachine.insertMoney()
+        val amount = 1
+        val balance = initBalance + amount
+
+        vendingMachine.insertMoney(amount)
+
         assertEquals(
             expected = State.HAS_MONEY,
             actual = getPrivateProperty(vendingMachine, "state"),
             message = "状态应变为 HAS_MONEY"
         )
+        assertEquals(
+            expected = balance,
+            actual = getPrivateProperty(vendingMachine, "balance"),
+            message = "balance 应为：$balance"
+        )
+        assertEquals(
+            expected = amount,
+            actual = getPrivateProperty(vendingMachine, "mAmount"),
+            message = "mAmount 应为：$amount"
+        )
     }
 
     @Test
     fun testInsertMoney_hasMoney() {
+        // given
+        val amount = 1
+        val balance = initBalance + amount
         // 进入HAS_MONEY 状态
-        vendingMachine.insertMoney()
-        vendingMachine.insertMoney()
+        vendingMachine.insertMoney(amount)
+
+        // when
+        vendingMachine.insertMoney(amount)
+
+        // then
         assertEquals(
             expected = State.HAS_MONEY,
             actual = getPrivateProperty(vendingMachine, "state"),
             message = "状态应保持不变"
         )
+        assertEquals(
+            expected = balance,
+            actual = getPrivateProperty(vendingMachine, "balance"),
+            message = "balance 应为：$balance"
+        )
+        assertEquals(
+            expected = amount,
+            actual = getPrivateProperty(vendingMachine, "mAmount"),
+            message = "balance 应为：$balance"
+        )
     }
 
     @Test
     fun testInsertMoney_OutOfStock() {
+        // given
         // 强行设置状态为 OUT_OF_STOCK (因为没有正常逻辑能到达这个状态)
         setPrivateProperty(vendingMachine, "state", State.OUT_OF_STOCK)
-        vendingMachine.insertMoney()
+
+        // when
+        vendingMachine.insertMoney(1)
+
+        // then
         assertEquals(
             expected = State.OUT_OF_STOCK,
             actual = getPrivateProperty(vendingMachine, "state"),
             message = "状态应保持不变"
+        )
+        assertEquals(
+            expected = initBalance,
+            actual = getPrivateProperty(vendingMachine, "balance"),
+            message = "balance 应为：$initBalance"
+        )
+        assertEquals(
+            expected = 0,
+            actual = getPrivateProperty(vendingMachine, "mAmount"),
+            message = "mAmount 应为：0"
         )
     }
 
@@ -111,24 +167,51 @@ class VendingMachineTest {
 
     @Test
     fun testRequestRefund_idle() {
+        // when
         vendingMachine.requestRefund()
+
+        // then
         assertEquals(
             expected = State.IDLE,
             actual = getPrivateProperty(vendingMachine, "state"),
             message = "状态应保持不变 IDLE"
         )
+        assertEquals(
+            expected = initBalance,
+            actual = getPrivateProperty(vendingMachine, "balance"),
+            message = "balance 应为：$initBalance"
+        )
+        assertEquals(
+            expected = 0,
+            actual = getPrivateProperty(vendingMachine, "mAmount"),
+            message = "mAmount 应为：0"
+        )
     }
 
     @Test
     fun testRequestRefund_hasMoney() {
+        // given
         // 进入HAS_MONEY 状态
         vendingMachine.insertMoney()
 
+        // when
         vendingMachine.requestRefund()
+
+        // then
         assertEquals(
             expected = State.IDLE,
             actual = getPrivateProperty(vendingMachine, "state"),
             message = "状态应变为 IDLE"
+        )
+        assertEquals(
+            expected = initBalance,
+            actual = getPrivateProperty(vendingMachine, "balance"),
+            message = "balance 应为：$initBalance"
+        )
+        assertEquals(
+            expected = 0,
+            actual = getPrivateProperty(vendingMachine, "mAmount"),
+            message = "mAmount 应为：0"
         )
     }
 
@@ -142,6 +225,16 @@ class VendingMachineTest {
             expected = State.OUT_OF_STOCK,
             actual = getPrivateProperty(vendingMachine, "state"),
             message = "状态应保持不变 OUT_OF_STOCK"
+        )
+        assertEquals(
+            expected = initBalance,
+            actual = getPrivateProperty(vendingMachine, "balance"),
+            message = "balance 应为：$initBalance"
+        )
+        assertEquals(
+            expected = 0,
+            actual = getPrivateProperty(vendingMachine, "mAmount"),
+            message = "mAmount 应为：0"
         )
     }
 }

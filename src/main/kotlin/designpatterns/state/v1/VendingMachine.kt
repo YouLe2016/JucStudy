@@ -7,19 +7,22 @@ import designpatterns.state.usecase.SelectProduceUseCase
 /**
  * 纯逻辑
  */
-class VendingMachine {
+class VendingMachine(private var balance: Int = 0) {
     private var state: State = State.IDLE
+    private var mAmount: Int = 0
 
     init {
         println("VendingMachine init. state = $state")
     }
 
-    fun insertMoney() {
+    fun insertMoney(amount: Int = 1) {
         when (state) {
             State.HAS_MONEY -> println("已投币，请勿重复投币")
             State.OUT_OF_STOCK -> println("商品已售罄")
             State.IDLE -> {
                 InsertMoneyUseCase()
+                balance += amount
+                mAmount = amount
                 state = State.HAS_MONEY
             }
         }
@@ -42,6 +45,8 @@ class VendingMachine {
             State.OUT_OF_STOCK -> println("商品已售罄")
             State.HAS_MONEY -> {
                 RequestRefundUseCase()
+                balance -= mAmount
+                mAmount = 0
                 state = State.IDLE
             }
         }
