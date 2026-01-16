@@ -11,10 +11,10 @@ object IdleState : VendingState {
     }
 
     override fun selectProduct() {
-        println("已投币，请勿重复投币")
+        TODO("Not yet implemented")
     }
 
     override fun requestRefund() {
-        println("商品已售罄")
+        TODO("Not yet implemented")
     }
 }

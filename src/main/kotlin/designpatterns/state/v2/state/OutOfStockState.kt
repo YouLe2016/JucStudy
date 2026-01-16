@@ -4,7 +4,7 @@ import designpatterns.state.v2.VendingMachineContext
 
 object OutOfStockState: VendingState {
     override fun insertMoney(context: VendingMachineContext) {
-        TODO("Not yet implemented")
+        println("商品已售罄")
     }
 
     override fun selectProduct() {

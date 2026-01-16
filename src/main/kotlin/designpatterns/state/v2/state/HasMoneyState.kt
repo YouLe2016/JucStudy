@@ -4,7 +4,7 @@ import designpatterns.state.v2.VendingMachineContext
 
 object HasMoneyState : VendingState {
     override fun insertMoney(context: VendingMachineContext) {
-        TODO("Not yet implemented")
+        println("已投币，请勿重复投币")
     }
 
     override fun selectProduct() {
