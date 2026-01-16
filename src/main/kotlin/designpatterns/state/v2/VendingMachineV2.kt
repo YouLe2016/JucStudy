@@ -1,10 +1,13 @@
 package designpatterns.state.v2
 
+import designpatterns.state.v2.state.DefaultState
+import designpatterns.state.v2.state.VendingState
+
 /**
  * 状态模式
  */
 class VendingMachineV2 {
-    private var state: VendingState = VendingState.Default
+    private var state: VendingState = DefaultState
 
     init {
         println("VendingMachineV2 init")
