@@ -1,0 +1,30 @@
+package designpatterns.state.v3.state
+
+import designpatterns.state.v3.VendingIntent
+
+import designpatterns.state.usecase.InsertMoneyUseCase
+import designpatterns.state.usecase.RequestRefundUseCase
+import designpatterns.state.usecase.SelectProduceUseCase
+
+
+object DefaultState : VendingState {
+    private val insertUseCase = InsertMoneyUseCase
+    private val selectProductUseCase = SelectProduceUseCase
+    private val requestRefundUseCase = RequestRefundUseCase
+
+    override fun handle(intent: VendingIntent) {
+        when (intent) {
+            is VendingIntent.InsertMoney -> {
+                insertUseCase()
+            }
+
+            is VendingIntent.SelectProduct -> {
+                selectProductUseCase()
+            }
+
+            is VendingIntent.RequestRefund -> {
+                requestRefundUseCase()
+            }
+        }
+    }
+}

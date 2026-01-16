@@ -5,7 +5,7 @@ package designpatterns.state.v2
  */
 class VendingMachineV2 : VendingMachineContext() {
     init {
-        println("VendingMachineV2 init state = $state")
+        println("VendingMachineV2 init. state = $state")
     }
 
     fun insertMoney() {

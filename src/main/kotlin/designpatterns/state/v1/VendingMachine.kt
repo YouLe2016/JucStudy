@@ -14,7 +14,7 @@ class VendingMachine() {
     private val requestRefundUseCase = RequestRefundUseCase
 
     init {
-        println("VendingMachine init, state = $state")
+        println("VendingMachine init. state = $state")
     }
 
     fun insertMoney() {

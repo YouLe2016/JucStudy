@@ -5,6 +5,6 @@ package designpatterns.state.v3
  */
 class VendingMachineV3: VendingMachineContext() {
     init {
-        println("VendingMachineV3 init")
+        println("VendingMachineV3 init. state = $state ")
     }
 }
