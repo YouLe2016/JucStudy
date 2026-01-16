@@ -5,7 +5,7 @@ import designpatterns.state.v3.state.VendingState
 
 open class VendingMachineContext {
     protected var state: VendingState = IdleState
-    fun process(intent: VendingIntent) {
+    protected fun process(intent: VendingIntent) {
         state.handle(intent, this)
     }
 
