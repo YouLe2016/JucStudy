@@ -44,8 +44,16 @@ public class Test1 {
             log.debug("method3 2");
             return 1;
         });
+        var task2 = new FutureTask<>(() -> {
+            log.debug("method3 1");
+            Thread.sleep(1000);
+            log.debug("method3 2");
+            return 1;
+        });
         var t = new Thread(task, "t1");
+        var t2 = new Thread(task2, "t1");
         t.start();
-        log.debug("method3 resultT1: {}", task.get());
+        t2.start();
+        log.debug("method3 resultT1: {}", task.get() + task2.get());
     }
 }

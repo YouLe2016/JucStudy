@@ -62,7 +62,7 @@ public class _13ExerciseSell {
     }
 
     // 随机 1~5
-    public static int randomAmount() {
+    private static int randomAmount() {
         return random.nextInt(5) + 1;
     }
 }
