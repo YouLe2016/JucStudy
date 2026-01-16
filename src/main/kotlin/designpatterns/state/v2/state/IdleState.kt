@@ -1,24 +1,20 @@
 package designpatterns.state.v2.state
 
 import designpatterns.state.usecase.InsertMoneyUseCase
-import designpatterns.state.usecase.RequestRefundUseCase
-import designpatterns.state.usecase.SelectProduceUseCase
 import designpatterns.state.v2.VendingMachineContext
 
-object DefaultState : VendingState {
+object IdleState : VendingState {
     private val insertUseCase = InsertMoneyUseCase
-    private val selectProductUseCase = SelectProduceUseCase
-    private val requestRefundUseCase = RequestRefundUseCase
-
     override fun insertMoney(context: VendingMachineContext) {
         insertUseCase()
+        context.changeState(HasMoneyState)
     }
 
     override fun selectProduct() {
-        selectProductUseCase()
+        println("已投币，请勿重复投币")
     }
 
     override fun requestRefund() {
-        requestRefundUseCase()
+        println("商品已售罄")
     }
 }

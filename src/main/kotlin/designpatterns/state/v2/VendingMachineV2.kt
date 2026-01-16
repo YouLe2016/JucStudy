@@ -1,20 +1,15 @@
 package designpatterns.state.v2
 
-import designpatterns.state.v2.state.DefaultState
-import designpatterns.state.v2.state.VendingState
-
 /**
  * 状态模式
  */
-class VendingMachineV2 {
-    private var state: VendingState = DefaultState
-
+class VendingMachineV2 : VendingMachineContext() {
     init {
-        println("VendingMachineV2 init")
+        println("VendingMachineV2 init state = $state")
     }
 
     fun insertMoney() {
-        state.insertMoney()
+        state.insertMoney(this)
     }
 
     fun selectProduct() {
@@ -23,9 +18,5 @@ class VendingMachineV2 {
 
     fun requestRefund() {
         state.requestRefund()
-    }
-
-    fun changeState(newState: VendingState) {
-        state = newState
     }
 }
