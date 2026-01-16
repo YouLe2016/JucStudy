@@ -5,15 +5,15 @@ import designpatterns.state.v3.VendingIntent
 import designpatterns.state.v3.VendingMachineContext
 
 object IdleState: VendingState {
-    private val insertUseCase = InsertMoneyUseCase
 
     override fun handle(intent: VendingIntent, context: VendingMachineContext) {
         when (intent) {
-            VendingIntent.InsertMoney -> {
-                insertUseCase()
+            is VendingIntent.InsertMoney -> {
+                InsertMoneyUseCase()
+                context.addBalance(intent.amount)
                 context.changeState(HasMoneyState)
             }
-            VendingIntent.RequestRefund -> TODO()
+            VendingIntent.RequestRefund -> println("请先投币")
             is VendingIntent.SelectProduct -> println("请先投币")
         }
     }
