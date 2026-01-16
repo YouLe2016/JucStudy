@@ -18,7 +18,14 @@ class VendingMachine() {
     }
 
     fun insertMoney() {
-        insertUseCase()
+        when (state) {
+            State.IDLE -> {
+                insertUseCase()
+                state = State.HAS_MONEY
+            }
+            State.HAS_MONEY -> println("已投币，请勿重复投币")
+            State.OUT_OF_STOCK -> println("商品已售罄")
+        }
     }
 
     fun selectProduct() {
