@@ -23,13 +23,22 @@ class VendingMachine() {
                 insertUseCase()
                 state = State.HAS_MONEY
             }
+
             State.HAS_MONEY -> println("已投币，请勿重复投币")
             State.OUT_OF_STOCK -> println("商品已售罄")
         }
     }
 
     fun selectProduct(code: String) {
-        selectProductUseCase(code)
+        when (state) {
+            State.IDLE -> println("请先投币")
+            State.HAS_MONEY -> {
+                val result = selectProductUseCase(code)
+                state = if (result) State.IDLE else State.HAS_MONEY
+            }
+
+            State.OUT_OF_STOCK -> println("商品已售罄")
+        }
     }
 
     fun requestRefund() {

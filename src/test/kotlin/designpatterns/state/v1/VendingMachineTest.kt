@@ -53,9 +53,58 @@ class VendingMachineTest {
     }
 
     @Test
-    fun testSelectProduct() {
+    fun testSelectProduct_idle() {
         vendingMachine.selectProduct("1024")
+        assertEquals(
+            expected = State.IDLE,
+            actual = getPrivateProperty("state"),
+            message = "状态应保持不变 IDLE"
+        )
         vendingMachine.selectProduct("1025")
+        assertEquals(
+            expected = State.IDLE,
+            actual = getPrivateProperty("state"),
+            message = "状态应保持不变 IDLE"
+        )
+    }
+    @Test
+    fun testSelectProduct_hasMoney() {
+        // 进入HAS_MONEY 状态
+        vendingMachine.insertMoney()
+        vendingMachine.selectProduct("1024")
+        assertEquals(
+            expected = State.IDLE,
+            actual = getPrivateProperty("state"),
+            message = "状态应为 IDLE"
+        )
+
+        // 进入HAS_MONEY 状态
+        vendingMachine.insertMoney()
+        vendingMachine.selectProduct("1025")
+        assertEquals(
+            expected = State.HAS_MONEY,
+            actual = getPrivateProperty("state"),
+            message = "状态应保持不变 HAS_MONEY"
+        )
+    }
+
+
+    @Test
+    fun testSelectProduct_outOfStock() {
+        // 强行设置状态为 OUT_OF_STOCK (因为没有正常逻辑能到达这个状态)
+        setPrivateProperty("state", State.OUT_OF_STOCK)
+        vendingMachine.selectProduct("1024")
+        assertEquals(
+            expected = State.OUT_OF_STOCK,
+            actual = getPrivateProperty("state"),
+            message = "状态应保持不变 OUT_OF_STOCK"
+        )
+        vendingMachine.selectProduct("1025")
+        assertEquals(
+            expected = State.OUT_OF_STOCK,
+            actual = getPrivateProperty("state"),
+            message = "状态应保持不变 OUT_OF_STOCK"
+        )
     }
 
     @Test
