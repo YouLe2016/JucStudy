@@ -7,5 +7,5 @@ sealed interface VendingState {
 
     fun selectProduct(code: String, context: VendingMachineContext)
 
-    fun requestRefund()
+    fun requestRefund(context: VendingMachineContext)
 }

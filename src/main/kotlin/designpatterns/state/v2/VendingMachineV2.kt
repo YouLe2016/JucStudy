@@ -17,6 +17,6 @@ class VendingMachineV2 : VendingMachineContext() {
     }
 
     fun requestRefund() {
-        state.requestRefund()
+        state.requestRefund(this)
     }
 }

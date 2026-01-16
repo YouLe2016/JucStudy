@@ -11,7 +11,7 @@ object OutOfStockState: VendingState {
         println("商品已售罄")
     }
 
-    override fun requestRefund() {
+    override fun requestRefund(context: VendingMachineContext) {
         println("商品已售罄")
     }
 }

@@ -7,7 +7,7 @@ import designpatterns.state.usecase.SelectProduceUseCase
 /**
  * 纯逻辑
  */
-class VendingMachine() {
+class VendingMachine {
     private var state: State = State.IDLE
 
     init {

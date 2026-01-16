@@ -109,9 +109,38 @@ class VendingMachineV2Test {
         )
     }
 
-//
-//    @Test
-//    fun testRequestRefund() {
-//        vendingMachine.requestRefund()
-//    }
+    @Test
+    fun testRequestRefund_idle() {
+        vendingMachine.requestRefund()
+        assertEquals(
+            expected = IdleState,
+            actual = getPrivateProperty(vendingMachine, "state"),
+            message = "状态应为 IDLE"
+        )
+    }
+
+    @Test
+    fun testRequestRefund_hasMoney() {
+        // 进入HAS_MONEY 状态
+        vendingMachine.insertMoney()
+
+        vendingMachine.requestRefund()
+        assertEquals(
+            expected = IdleState,
+            actual = getPrivateProperty(vendingMachine, "state"),
+            message = "退款后状态应为 IDLE"
+        )
+    }
+
+    @Test
+    fun testRequestRefund_outOfStock() {
+        setPrivateProperty(vendingMachine, "state", OutOfStockState)
+
+        vendingMachine.requestRefund()
+        assertEquals(
+            expected = OutOfStockState,
+            actual = getPrivateProperty(vendingMachine, "state"),
+            message = "状态应为 OUT_OF_STOCK"
+        )
+    }
 }
