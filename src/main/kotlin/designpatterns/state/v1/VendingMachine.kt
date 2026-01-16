@@ -9,9 +9,6 @@ import designpatterns.state.usecase.SelectProduceUseCase
  */
 class VendingMachine() {
     private var state: State = State.IDLE
-    private val insertUseCase = InsertMoneyUseCase
-    private val selectProductUseCase = SelectProduceUseCase
-    private val requestRefundUseCase = RequestRefundUseCase
 
     init {
         println("VendingMachine init. state = $state")
@@ -20,7 +17,7 @@ class VendingMachine() {
     fun insertMoney() {
         when (state) {
             State.IDLE -> {
-                insertUseCase()
+                InsertMoneyUseCase()
                 state = State.HAS_MONEY
             }
 
@@ -33,7 +30,7 @@ class VendingMachine() {
         when (state) {
             State.IDLE -> println("请先投币")
             State.HAS_MONEY -> {
-                val result = selectProductUseCase(code)
+                val result = SelectProduceUseCase(code)
                 state = if (result) State.IDLE else State.HAS_MONEY
             }
 
@@ -42,6 +39,14 @@ class VendingMachine() {
     }
 
     fun requestRefund() {
-        requestRefundUseCase()
+        when (state) {
+            State.IDLE -> println("请先投币")
+            State.HAS_MONEY -> {
+                RequestRefundUseCase()
+                state = State.IDLE
+            }
+
+            State.OUT_OF_STOCK -> println("商品已售罄")
+        }
     }
 }
