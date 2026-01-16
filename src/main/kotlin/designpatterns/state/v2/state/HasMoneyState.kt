@@ -5,7 +5,7 @@ import designpatterns.state.usecase.SelectProduceUseCase
 import designpatterns.state.v2.VendingMachineContext
 
 object HasMoneyState : VendingState {
-    override fun insertMoney(context: VendingMachineContext) {
+    override fun insertMoney(amount: Int, context: VendingMachineContext) {
         println("已投币，请勿重复投币")
     }
 
@@ -16,6 +16,7 @@ object HasMoneyState : VendingState {
 
     override fun requestRefund(context: VendingMachineContext) {
         RequestRefundUseCase()
+        context.reduceBalance()
         context.changeState(IdleState)
     }
 }

@@ -4,8 +4,9 @@ import designpatterns.state.usecase.InsertMoneyUseCase
 import designpatterns.state.v2.VendingMachineContext
 
 object IdleState : VendingState {
-    override fun insertMoney(context: VendingMachineContext) {
+    override fun insertMoney(amount: Int, context: VendingMachineContext) {
         InsertMoneyUseCase()
+        context.addBalance(amount)
         context.changeState(HasMoneyState)
     }
 
