@@ -174,7 +174,7 @@ class VendingMachineV3Test {
         assertEquals(
             expected = HasMoneyState,
             actual = getPrivateProperty(vendingMachine,"state"),
-            message = "状态应保持不变 IDLE"
+            message = "状态应保持不变 HasMoneyState"
         )
         assertEquals(
             expected = balance,
@@ -256,6 +256,7 @@ class VendingMachineV3Test {
         // 进入HAS_MONEY 状态
         vendingMachine.insertMoney()
 
+        // when
         vendingMachine.requestRefund()
 
         // then

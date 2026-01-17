@@ -3,8 +3,8 @@ package designpatterns.state.v4
 import designpatterns.state.v4.state.IdleState
 import designpatterns.state.v4.state.VendingState
 
-class VendingMachineV4 {
-    private var state: VendingState = IdleState
+class VendingMachineV4(balance: Int) {
+    private var state: VendingState = IdleState(balance)
 
     init {
         println("VendingMachineV4 init. state = $state")
@@ -13,9 +13,9 @@ class VendingMachineV4 {
     private fun process(intent: VendingIntent) {
         state = state.handle(intent)
     }
-    
-    fun insertMoney() {
-        process(VendingIntent.InsertMoney)
+
+    fun insertMoney(amount: Int = 1) {
+        process(VendingIntent.InsertMoney(amount))
     }
 
     fun selectProduct(code: String) {

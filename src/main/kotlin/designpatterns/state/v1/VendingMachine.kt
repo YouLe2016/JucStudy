@@ -34,6 +34,7 @@ class VendingMachine(private var balance: Int = 0) {
             State.OUT_OF_STOCK -> println("商品已售罄")
             State.HAS_MONEY -> {
                 val result = SelectProduceUseCase(code)
+                mAmount = 0
                 state = if (result) State.IDLE else State.HAS_MONEY
             }
         }
