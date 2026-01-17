@@ -23,4 +23,8 @@ open class VendingMachineContext(private var balance: Int = 0) {
         balance -= mAmount
         mAmount = 0
     }
+
+    fun resetAmount() {
+        mAmount = 0
+    }
 }

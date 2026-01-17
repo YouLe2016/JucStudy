@@ -20,7 +20,10 @@ object HasMoneyState: VendingState {
             }
             is VendingIntent.SelectProduct -> {
                 val result = SelectProduceUseCase(intent.code)
-                context.changeState(if (result) IdleState else this)
+                if (result) {
+                    context.changeState(IdleState)
+                    context.resetAmount()
+                }
             }
         }
     }
